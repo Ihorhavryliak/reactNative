@@ -7,12 +7,12 @@ import { gStyle } from "./styles/style";
 import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from 'expo-font';
 import * as Font from "expo-font";
-import MainStack from "./navigate";
+import Main from "./navigate";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    "Montserrat-Light": require("./assets/fonts/Montserrat-Light.ttf"),
-    "Montserrat-Bold": require("./assets/fonts/Montserrat-Bold.ttf"),
+    "mtLight": require("./assets/fonts/Montserrat-Light.ttf"),
+    "mtBold": require("./assets/fonts/Montserrat-Bold.ttf"),
   });
   
   useEffect(() => {
@@ -28,5 +28,5 @@ export default function App() {
     SplashScreen.hideAsync();
   }
 
-  return <MainStack />;
+  return <Main />;
 }

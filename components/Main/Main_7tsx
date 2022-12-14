@@ -1,0 +1,23 @@
+import { NavigationProp, ParamListBase } from '@react-navigation/native'
+import React from 'react'
+import { Button, Text, View } from 'react-native'
+import { gStyle } from '../../styles/style'
+
+
+export type NavigationType = {
+  navigation: NavigationProp<ParamListBase>
+}
+
+
+export const  Main = (props: NavigationType) => {
+  const {navigation} = props;
+  const loadScene = () => {
+    navigation.navigate('Contacts')
+  }
+  return (
+    <View style={gStyle.main}>
+      <Text style={gStyle.title}>Main</Text>
+      <Button title='Open page' onPress={loadScene} />
+    </View>
+  )
+}
