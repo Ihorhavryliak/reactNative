@@ -4,6 +4,7 @@ import { Button, FlatList, Image, Modal, StyleSheet, Text, TouchableOpacity, Vie
 import { NavigationDataType } from '../../navigate'
 import { gStyle } from '../../styles/style'
 import { Ionicons } from '@expo/vector-icons';
+import { Forms } from '../Form/Forms'
 
 export type NavigationType = {
   navigation: NavigationProp<ParamListBase, NavigationDataType>  
@@ -14,11 +15,12 @@ export type NewsType = {
   anons: string
   full: string
   img: any
+  id?: string
 }
 
 export const  Main = (props: NavigationType) => {
 const {navigation} = props;
-  const [news, setNews] = useState([
+  const [news, setNews] = useState<NewsType[]>([
     {name: 'Google', anons:'Google', 
     full: 'Google is cool.' , id: '1', img: 'https://static.wikia.nocookie.net/project-engage/images/5/51/Img_game.jpg/revision/latest?cb=20220612083201'},
    {name: 'Apple', anons:'Apple', 
@@ -27,12 +29,26 @@ const {navigation} = props;
     full: 'Facebook is cool.', id: '3', img: 'https://static.wikia.nocookie.net/project-engage/images/5/51/Img_game.jpg/revision/latest?cb=20220612083201'}, 
   ])
   const [modalWindow, setModalWindow] = useState(false)
+ 
+  const addArticle = (article: NewsType)=>{
+    setNews((list) => {
+      article.id = Math.random().toString();
+      return( [
+        article,
+        ...list
+      ]
+    )});
+
+    setModalWindow(false);
+  }
+
   return (
     <View style={gStyle.main}>
       <Modal visible={modalWindow}>
       <View style={gStyle.main}>
       <Ionicons name="close-circle-outline" onPress={()=> setModalWindow(false)} size={24} color="red" style={style.iconClose} />
         <Text style={style.name}>Form add articles </Text>
+        <Forms addArticle={addArticle} />
       </View>
 
       </Modal>
